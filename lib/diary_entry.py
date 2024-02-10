@@ -11,7 +11,7 @@ class DiaryEntry:
         #   Sets the title and contents properties
         self.contents = contents
         self.title = title
-        self.contents_remainder = self.contents.split()
+        self._contents_remainder = self.contents.split()
 
     def count_words(self):
         # Returns:
@@ -44,11 +44,11 @@ class DiaryEntry:
         if self.count_words() <= num_words_can_read: 
             return self.contents
         else: 
-            if len(self.contents_remainder) == self.contents.split() or len(self.contents_remainder) >= num_words_can_read:
-                contents_chunk = " ".join(self.contents_remainder[0:num_words_can_read]) 
-                self.contents_remainder = self.contents_remainder[num_words_can_read:] 
+            if len(self._contents_remainder) == self.contents.split() or len(self._contents_remainder) >= num_words_can_read:
+                contents_chunk = " ".join(self._contents_remainder[0:num_words_can_read]) 
+                self._contents_remainder = self._contents_remainder[num_words_can_read:] 
                 return f"{contents_chunk}" 
             else:
-                the_last_bit_of_text = " ".join(self.contents_remainder)
-                self.contents_remainder = self.contents.split() 
+                the_last_bit_of_text = " ".join(self._contents_remainder)
+                self._contents_remainder = self.contents.split() 
                 return the_last_bit_of_text

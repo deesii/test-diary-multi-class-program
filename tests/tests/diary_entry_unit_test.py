@@ -37,7 +37,7 @@ def test_title_count_words_and_reading_time_given_longer_string_content():
 
 #given a longer string , count the words and reading time for a float and round up
 
-def test_given_longer_string_content_calculate_float_round_down_reading_time():
+def test_given_longer_string_content_calculate_round_up_reading_time():
     contents = " ".join("word" for i in range(875))
     diary_entry = DiaryEntry("Thursday 4th", contents)
 
