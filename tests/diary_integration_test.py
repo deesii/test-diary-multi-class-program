@@ -116,7 +116,7 @@ def test_diary_entries_added_to_non_empty_diary_entries_less_than_words():
     diary_entry_2 = DiaryEntry("2nd January 2024", " ".join("word" for i in range(390)))
     diary.add(diary_entry_1)
     diary.add(diary_entry_2)
-    assert diary.count_words() == 700
+    assert diary.count_words() == 690
     assert diary.reading_time(200) == 4
     assert diary.find_best_entry_for_reading_time(200,2) == diary_entry_2
 
@@ -145,7 +145,7 @@ one entry under the total words and one equal to the total words they can read =
 
 '''
 
-def test_diary_entries_added_to_non_empty_diary_entries_equal_to_words():
+def test_diary_entries_added_to_non_empty_diary_entries_one_less_than_one_equal_to_words_limit():
     diary = Diary()
     diary_entry_1 = DiaryEntry("1st Jan 2024", " ".join("word" for i in range(300)))
     diary_entry_2 = DiaryEntry("2nd January 2024", " ".join("word" for i in range(400)))
@@ -158,11 +158,11 @@ def test_diary_entries_added_to_non_empty_diary_entries_equal_to_words():
 
 '''
 Integrated: Given multiple long diary entries find 1st entry given the number of available minutes to read ,
-one entry under the total words and one equal to the total words they can read => choose the equal number of words
-# assuming later date will be chosen if two entries have the same word count
+one entry under the total words and two equal to the total words they can read => choose the equal number of words
+# assuming the latest date will be chosen if two entries have the same word count
 '''
 
-def test_diary_entries_added_to_non_empty_diary_entries_equal_to_words():
+def test_diary_entries_added_to_non_empty_diary_entries_one_less_limit_some_equal_to_word_limit():
     diary = Diary()
     diary_entry_1 = DiaryEntry("1st Jan 2024", " ".join("word" for i in range(300)))
     diary_entry_2 = DiaryEntry("2nd January 2024", " ".join("word" for i in range(400)))
@@ -172,4 +172,23 @@ def test_diary_entries_added_to_non_empty_diary_entries_equal_to_words():
     diary.add(diary_entry_3)
     assert diary.count_words() == 1100
     assert diary.reading_time(200) == 6
-    assert diary.find_best_entry_for_reading_time(200,2) == diary_entry_2
+    assert diary.find_best_entry_for_reading_time(200,2) == diary_entry_3
+
+
+'''
+Integrated: Given multiple long diary entries find 1st entry given the number of available minutes to read ,
+all entries are < than the total number of words they can read => choose the entry with the number closest to the limit
+# assuming the latest date will be chosen if two entries have the same word count
+'''
+
+def test_diary_entries_added_to_non_empty_diary_all_under_limit_choose_entry_closest_to_limit():
+    diary = Diary()
+    diary_entry_1 = DiaryEntry("1st Jan 2024", " ".join("word" for i in range(380)))
+    diary_entry_2 = DiaryEntry("2nd January 2024", " ".join("word" for i in range(320)))
+    diary_entry_3 = DiaryEntry("3rd January 2024", " ".join("word" for i in range(315)))
+    diary.add(diary_entry_1) 
+    diary.add(diary_entry_2)
+    diary.add(diary_entry_3)
+    assert diary.count_words() == 1015
+    assert diary.reading_time(240) == 5
+    assert diary.find_best_entry_for_reading_time(240,2) == diary_entry_1

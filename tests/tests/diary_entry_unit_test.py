@@ -5,7 +5,7 @@ from lib.diary_entry import *
 def test_diary_entry_instanciated_with_properties():
     diary_entry_1 = DiaryEntry("My Title", "These are the contents")
     assert diary_entry_1.title == "My Title"
-    assert diary_entry_1.content == "These are the contents"
+    assert diary_entry_1.contents == "These are the contents"
 
 
 #given the title and contents, we can count the words of the in the diary contents

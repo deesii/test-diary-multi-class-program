@@ -11,6 +11,7 @@ class DiaryEntry:
         #   Sets the title and contents properties
         self.contents = contents
         self.title = title
+        self.contents_remainder = self.contents.split()
 
     def count_words(self):
         # Returns:
